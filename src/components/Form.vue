@@ -1,36 +1,62 @@
-
 <template>
-  
-  <h>Formulaire</h>
-  <label for="nom" class="form-element">Nom</label>
-  <input type="text" name="nom" id="nom" v-model="nom" class="form-element" />
-  <label for="prenom" class="form-element">Prénom</label>
-  <input
-    type="text"
-    name="prenom"
-    id="prenom"
-    v-model="prenom"
-    class="form-element"
-  />
-  <label for="email" class="form-element">Email</label>
-  <input
-    type="email"
-    name="email"
-    id="email"
-    v-model="email"
-    class="form-element"
-  />
-
-  <button v-if="edit" @click="updateContact(selectedId)" class="form-element">
-    Modifier
-  </button>
-  <button v-if="edit" @click="edit = false" class="form-element">
-    Annuler
-  </button>
-  <button v-else @click="createContact" class="btn btn-primary">
-    Créer un contact
-  </button>
+  <div class="container">
+    <h1 class="text-center">Formulaire</h1>
+    <div class="row mb-3">
+      <label for="nom" class="col-sm-2 col-form-label">Nom</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          name="nom"
+          id="nom"
+          v-model="nom"
+          class="form-control"
+          required
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="prenom" class="col-sm-2 col-form-label">Prénom</label>
+      <div class="col-sm-10">
+        <input
+          type="text"
+          name="prenom"
+          id="prenom"
+          v-model="prenom"
+          class="form-control"
+          required
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="email" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input
+          type="email"
+          name="email"
+          id="email"
+          v-model="email"
+          class="form-control"
+          required
+        />
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm-10 offset-sm-2">
+        <button
+          v-if="edit"
+          @click="edit = false"
+          class="btn btn-secondary mr-2"
+        >
+          Annuler
+        </button>
+        <button v-else @click="createContact" class="btn btn-primary">
+          Créer un contact
+        </button>
+      </div>
+    </div>
+  </div>
 </template>
+
 <script>
 const BASE_ID = import.meta.env.VITE_APP_BASS_ID;
 const TABLE_NAME = "Leads";

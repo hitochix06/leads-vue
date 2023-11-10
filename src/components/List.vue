@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center">
+  <div class="container">
     <div>
       <h1 class="text-center">Liste</h1>
       <table class="table">
@@ -7,6 +7,7 @@
           <tr>
             <th scope="col">Nom</th>
             <th scope="col">Prenom</th>
+            <th scope="col">Email</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -14,6 +15,7 @@
           <tr v-for="contact in contacts" :key="contact.id">
             <td>{{ contact.fields.Nom }}</td>
             <td>{{ contact.fields.Prenom }}</td>
+            <td>{{ contact.fields.Email }}</td>
             <td>
               <button
                 class="btn btn-primary button-margin"
