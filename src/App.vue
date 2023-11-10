@@ -1,16 +1,18 @@
 <template>
-  <List />
+  <Navigation />
+  <RouterView />
 </template>
 
 <script>
-import List from './components/List.vue';
+import { RouterView } from 'vue-router';
+import Navigation from "./components/Navigation.vue";
 
 export default {
   components: {
-    List
-  }
-}
+    Navigation,
+    RouterView,
+  },
+};
 </script>
-
 
 <style scoped></style>

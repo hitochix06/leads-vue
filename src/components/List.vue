@@ -1,29 +1,41 @@
 <template>
-  <h1>Liste</h1>
-  <ul>
-    <li v-for="contact in contacts" :key="contact.id">
-      {{ contact.fields.Nom }} {{ contact.fields.Prenom }}
-      <button @click="handleUpdate(contact)">Modifier</button>
-      <button @click="deleteContact(contact.id)">Supprimer</button>
-    </li>
-  </ul>
-
-  <label for="nom">Nom</label>
-  <input type="text" name="nom" id="nom" v-model="nom" />
-  <label for="prenom">Prénom</label>
-  <input type="text" name="prenom" id="prenom" v-model="prenom" />
-  <label for="email">Email</label>
-  <input type="email" name="email" id="email" v-model="email" />
-  <button v-if="edit" @click="updateContact(selectedId)">Modifier</button>
-  <button v-if="edit" @click="edit = false">Annuler</button>
-  <button v-else @click="createContact">Créer un contact</button>
+  <div class="d-flex justify-content-center">
+    <div>
+      <h1 class="text-center">Liste</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="contact in contacts" :key="contact.id">
+            <td>{{ contact.fields.Nom }}</td>
+            <td>{{ contact.fields.Prenom }}</td>
+            <td>
+              <button
+                class="btn btn-primary button-margin"
+                @click="handleUpdate(contact)"
+              >
+                Modifier
+              </button>
+              <button class="btn btn-danger" @click="deleteContact(contact.id)">
+                Supprimer
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 <script>
-const BASE_ID = "appkFMaayQlwlgR1G";
+const BASE_ID = import.meta.env.VITE_APP_BASS_ID;
 const TABLE_NAME = "Leads";
 const VIEW_NAME = "Grid view";
-const API_TOKEN =
-  "pataeiFk9nJ6SYxpg.d029a8876c3790c17ec8d813445ddfe034f44d04266a9795f94abc53da09108c";
+const API_TOKEN = import.meta.env.VITE_APP_TOKEN;
 
 export default {
   data() {
@@ -67,7 +79,9 @@ export default {
         method: "DELETE",
       })
         .then((response) => response.json())
-        .then((data) => {})
+        .then((data) => {
+          this.getContacts();
+        })
         .catch((error) => {
           console.log(error);
         });
@@ -91,6 +105,7 @@ export default {
         .then((data) => {
           this.handleResetForm();
           this.edit = false;
+          this.getContacts();
         })
         .catch((error) => {
           console.log(error);
@@ -120,6 +135,7 @@ export default {
       })
         .then((response) => response.json())
         .then((data) => {
+          this.getContacts();
           this.handleResetForm();
         })
         .catch((error) => {
@@ -131,11 +147,10 @@ export default {
   mounted() {
     this.getContacts();
   },
-  watch: {
-    edit() {
-      this.getContacts();
-    },
-  },
 };
 </script>
-<style></style>
+<style>
+.button-margin {
+  margin-right: 10px;
+}
+</style>
